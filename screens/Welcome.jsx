@@ -29,17 +29,18 @@ export default function Welcome() {
       <Text style = {tw`text-xl text-[${COLORS.brown}] font-bold`}>
         Your Gateway to a Healthier You
       </Text>
-      <View style = {tw`flex`}>
+      <View style = {tw`flex flex-row mx-4 px-4`}>
 
-        <TouchableOpacity style = {tw` bg-[${COLORS.green}] m-4 p-3 px-15 rounded-xl`} onPress={navigateToLogin}>
+        <TouchableOpacity style = {tw` bg-[${COLORS.green}] ml-2 m-4 p-3  rounded-xl`} onPress={navigateToLogin}>
         <View style = {tw`flex items-center justify-center`}>
-        <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg mr-4`}>Get Stated</Text>
+        <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg mr-4`}>Login</Text>
 
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style = {tw` bg-[${COLORS.green}] m-4 p-3 px-15 rounded-xl`} onPress={navigateToSignUp}>
+      
+      <TouchableOpacity style = {tw` bg-[${COLORS.green}] m-4 p-3 rounded-xl`} onPress={navigateToSignUp}>
         <View style = {tw`flex items-center justify-center`}>
-        <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg mr-4`}>Get Stated</Text>
+        <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg mr-4`}>Sign Up</Text>
 
         </View>
       </TouchableOpacity>
