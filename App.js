@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import BottomTabNavigation from './navigation/BottomTabNavigation';
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
+import SignUp from './screens/SignUp';
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen name = "Welcome" component={Welcome}  options = {{headerShown: false}}/>
         <Stack.Screen name = "Login" component={Login}  options = {{headerShown: false}}/>
+        <Stack.Screen name = "Sign Up" component={SignUp}  options = {{headerShown: false}}/>
         <Stack.Screen 
           name = "Bottom Navigation"
           component={BottomTabNavigation}
