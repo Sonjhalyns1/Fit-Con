@@ -3,12 +3,13 @@ import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
+import { COLORS } from '../constants/theme';
 
 export default function ExerciseList({ data }) {
   const navigation = useNavigation();
 
   const handleCardPress = (item) => {
-    navigation.navigate('BodyPart', { bodyPart: item.name });
+    navigation.navigate('Exercise Details', { Exercise: item });
   };
 
   return (
@@ -40,7 +41,7 @@ const ExerciseCard = ({ item, onPress }) => {
           />
         </View>
         <Text
-          style={{ fontSize: hp(1.7), color: '#333', fontWeight: 'bold', marginLeft: 5, marginTop: 5 }}
+          style={{ fontSize: hp(1.7), color: COLORS.green, fontWeight: 'bold', marginLeft: 5, marginTop: 5 }}
         >
           {item?.name?.length > 20 ? item.name.slice(0, 20) + '...' : item.name}
         </Text>

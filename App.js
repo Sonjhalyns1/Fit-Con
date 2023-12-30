@@ -23,7 +23,7 @@ export default function App() {
         <Stack.Screen name = "Login" component={Login}  options = {{headerShown: false}}/>
         <Stack.Screen name = "Sign Up" component={SignUp}  options = {{headerShown: false}}/>
         
-        <Stack.Screen name="Exercise Details" component={ExerciseDetails} />
+        <Stack.Screen name="Exercise Details" component={ExerciseDetails} options={{presentation: "modal"}}/>
         <Stack.Screen name="BodyPart" component={BodyPart} />
         <Stack.Screen 
           name = "Bottom Navigation"
