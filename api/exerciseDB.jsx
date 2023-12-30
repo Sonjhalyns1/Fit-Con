@@ -9,9 +9,9 @@ const apiCall = async(url , params) => {
         const options = {
             method: 'GET',
             url,
-            params ,
+            params: {limit: '20'},
             headers: {
-              'X-RapidAPI-Key': rapidApiKey,
+              'X-RapidAPI-Key': "b7803a6276mshe589fac8576fc43p18fdbdjsn553835400336",
               'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
             }
           };

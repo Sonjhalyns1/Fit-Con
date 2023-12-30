@@ -11,6 +11,7 @@ import SignUp from './screens/SignUp';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BodyParts from './components/BodyParts';
 import BodyPart from './screens/BodyPart';
+import ExerciseDetails from './screens/ExerciseDetails';
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
@@ -21,6 +22,8 @@ export default function App() {
         <Stack.Screen name = "Welcome" component={Welcome}  options = {{headerShown: false}}/>
         <Stack.Screen name = "Login" component={Login}  options = {{headerShown: false}}/>
         <Stack.Screen name = "Sign Up" component={SignUp}  options = {{headerShown: false}}/>
+        
+        <Stack.Screen name="Exercise Details" component={ExerciseDetails} />
         <Stack.Screen name="BodyPart" component={BodyPart} />
         <Stack.Screen 
           name = "Bottom Navigation"
