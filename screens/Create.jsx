@@ -15,7 +15,7 @@ export default function Create() {
         uuid: auth.currentUser.uid
     });
     const handleAddExercise = () => {
-        const updatedExercises = [...formData.exercises, { name: '', weight: '',reps:"",   sets: [] }];
+        const updatedExercises = [...formData.exercises, { name: '', weight: '',reps:"",   sets: [], workoutId: "" }];
         setFormData({ ...formData, exercises: updatedExercises });
       };
     

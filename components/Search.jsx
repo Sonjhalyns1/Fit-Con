@@ -28,6 +28,7 @@ export default function Search() {
   return (
     <View style={tw`flex`}>
       <TextInput
+        autoCapitalize='none'
         placeholder="Search exercise name"
         value={search}
         onChangeText={(text) => onChange('search', text)}

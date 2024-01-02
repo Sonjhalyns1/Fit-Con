@@ -1,16 +1,22 @@
 import { View, Text, TextInput, Button, Image} from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import tw from "twrnc"
 import { COLORS, SIZES} from '../constants/theme';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { SelectList } from 'react-native-dropdown-select-list'
+import { WorkoutData } from '../data/WortkoutData';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 export default function Workout({ index, exercise, onChange }) {
+    const [selected, setSelected] = useState("");
     const handleAddSet = () => {
         const updatedSets = [...(exercise.sets || []), { setNumber: (exercise.sets || []).length + 1, weight: '', reps: '' }];
         onChange(index, 'sets', updatedSets);
       };
-    
+      const handleWorkoutIdChange = (newWorkoutId) => {
+        onChange(index, 'WorkoutId', newWorkoutId);
+      };
       const handleSetChange = (setIndex, field, value) => {
         const updatedSets = [...exercise.sets];
         updatedSets[setIndex][field] = value;
@@ -25,25 +31,22 @@ export default function Workout({ index, exercise, onChange }) {
     
     <View style = {tw`border p-2 rounded-b-2xl bg-[${COLORS.green}]`}>
         
-      <TextInput
-        
-        placeholder="Exercise Name"
-        value={exercise.name}
-        onChangeText={(text) => onChange(index, 'name', text)}
-        style = {tw`p-2 border mt-2 rounded-3xl bg-[${COLORS.brown}] text-[${COLORS.primary}]`}
-      />
-      <View style = {tw`flex flex-row mt-4`}>
-        <View>
-            <Image  
-                resizeMode='contain'
-                style={[{ width: wp(30), height: 150 }, tw` rounded rounded-3xl`]}
-                source={require("../assets/image/practice.gif")}
-            />
+    <SelectList 
+  setSelected={(val) => setSelected(val)} 
+  onSelect={() => handleWorkoutIdChange(selected) }
+  data={WorkoutData}
+  boxStyles={{backgroundColor: COLORS.brown }}
+  dropdownStyles={{backgroundColor: COLORS.brown}}
+  dropdownTextStyles={{color: COLORS.primary}}
+  
+  save="key"
+/>
+      
+      <View style = {tw`flex mt-4`}>
 
-        </View>
         <View>
             
-            <View style = {tw`flex flex-row`}>
+            <View style = {tw`flex flex-row justify-between`}>
                 <Text style = {tw`m-2 text-[${COLORS.primary}]`}>
                     Set
                 </Text>
@@ -56,7 +59,7 @@ export default function Workout({ index, exercise, onChange }) {
         </View>
         
         {exercise.sets.map((set, setIndex) => (
-            <View  key={setIndex} style = {tw`flex flex-row`}>
+            <View  key={setIndex} style = {tw`flex flex-row justify-between`}>
             <Text style = {tw`m-2 mr-4 text-[${COLORS.primary}]`} >{set.setNumber}</Text>
             <TextInput
                 style = {tw`m-2 text-[${COLORS.primary}]`}
@@ -65,7 +68,7 @@ export default function Workout({ index, exercise, onChange }) {
                 onChangeText={(text) => handleSetChange(setIndex, 'weight', text)}
             />
             <TextInput
-                
+                style = {tw`m-2 text-[${COLORS.primary}]`}
                 placeholder="Reps"
                 value={set.rep}
                 onChangeText={(text) => handleSetChange(setIndex, 'rep', text)}
