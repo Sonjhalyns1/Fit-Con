@@ -1,22 +1,29 @@
-import { View, Text, ScrollView, TextInput, Button } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, TextInput, Button,  ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 import { addDoc, collection, getFirestore } from 'firebase/firestore'
 import Workout from '../components/Workout'
 import tw from "twrnc"
 import { COLORS } from '../constants/theme'
+import { fetchExercisesById } from '../api/IdExerciseDB'
+
 
 export default function Create() {
+ 
+    
+      
     const auth = getAuth()
     const db = getFirestore()
     const [formData, setFormData] = useState({
         title: '', 
         exercises: [],
+        numberOfSets: 0, 
         uuid: auth.currentUser.uid
     });
     const handleAddExercise = () => {
-        const updatedExercises = [...formData.exercises, { name: '', weight: '',reps:"",   sets: [], workoutId: "" }];
-        setFormData({ ...formData, exercises: updatedExercises });
+        const updatedExercises = [...formData.exercises, { name: '', sets: []}];
+        setFormData({ ...formData, exercises: updatedExercises, numberOfSets: formData.numberOfSets + 1, });
+        
       };
     
       const handleExerciseChange = (index, field, value) => {
@@ -35,7 +42,8 @@ export default function Create() {
       };
 
   return (
-    <ScrollView style = {tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`} >
+    
+    <ScrollView contentContainerStyle={{ paddingBottom: 100 }}  style = {tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`} >
       <TextInput
         placeholder="Workout Title"
         value={formData.title}
@@ -52,5 +60,6 @@ export default function Create() {
       <Button title="Add Exercise" onPress={handleAddExercise} />
       <Button title="Submit Workout" onPress={handleWorkoutSubmit} />
     </ScrollView>
+    
   )
 }

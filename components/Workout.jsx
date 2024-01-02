@@ -1,3 +1,4 @@
+
 import { View, Text, TextInput, Button, Image} from 'react-native'
 import React, { useState } from 'react'
 import tw from "twrnc"
@@ -6,6 +7,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import { SelectList } from 'react-native-dropdown-select-list'
 import { WorkoutData } from '../data/WortkoutData';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 
 
 export default function Workout({ index, exercise, onChange }) {
@@ -39,7 +41,7 @@ export default function Workout({ index, exercise, onChange }) {
   dropdownStyles={{backgroundColor: COLORS.brown}}
   dropdownTextStyles={{color: COLORS.primary}}
   
-  save="key"
+  save="value"
 />
       
       <View style = {tw`flex mt-4`}>

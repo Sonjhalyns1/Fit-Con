@@ -23,7 +23,7 @@ const apiCall = async(url , params) => {
     }
 }
 
-export const fetchExercisesByName = async (name) => {
-    let data = await apiCall(baseUrl+ `/exercises/name/${name}`)
+export const fetchExercisesById = async (Identifier) => {
+    let data = await apiCall(baseUrl+ `/exercises/exercise/${Identifier}`)
     return data
 }

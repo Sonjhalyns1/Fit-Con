@@ -11,7 +11,7 @@ const apiCall = async(url , params) => {
             url,
             params: {limit: '20'},
             headers: {
-              'X-RapidAPI-Key': "b7803a6276mshe589fac8576fc43p18fdbdjsn553835400336",
+              'X-RapidAPI-Key': "8fe49a3681msh6b435a252da7f17p12fe8bjsn1271687db2bb",
               'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
             }
           };

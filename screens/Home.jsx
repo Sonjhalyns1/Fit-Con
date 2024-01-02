@@ -72,7 +72,7 @@ export default function Home() {
     }
 
   return (
-    <ScrollView style = {tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`}>
+    <ScrollView contentContainerStyle={{ paddingBottom: 100 }}  style = {tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`}>
       {profile && (
                 <View >
                     <Text style={tw`text-3xl text-[${COLORS.dark}] font-bold`}>HI <Text style={tw`text-2xl text-[${COLORS.dark}] text-3xl font-bold`}>{profile.name}</Text>! <MaterialCommunityIcons name= "hand-wave" size={hp(4)} style = {tw`text-[${COLORS.dark}]`} /></Text>
