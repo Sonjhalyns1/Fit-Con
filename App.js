@@ -14,6 +14,7 @@ import BodyPart from './screens/BodyPart';
 import ExerciseDetails from './screens/ExerciseDetails';
 import SeachedExercise from './screens/SeachedExercise';
 import WorkoutInfo from './screens/WorkoutInfo';
+import History from './screens/History';
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Stack.Screen name="Exercise Details" component={ExerciseDetails} options={{presentation: "modal"}}/>
         <Stack.Screen name="BodyPart" component={BodyPart} />
         <Stack.Screen name="Search Exercise" component={SeachedExercise} />
+        <Stack.Screen name="History" component={History} />
         <Stack.Screen name = "Workout information" component = {WorkoutInfo} />
         <Stack.Screen 
           name = "Bottom Navigation"

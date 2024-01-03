@@ -39,7 +39,7 @@ export default function Search() {
           <Text style={tw`text-black text-center`}>Search</Text>
         </View>
       </TouchableOpacity>
-      <ExerciseList data={[]} />
+      
     </View>
   );
 }

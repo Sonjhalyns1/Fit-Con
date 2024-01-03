@@ -6,11 +6,12 @@ import Workout from '../components/Workout'
 import tw from "twrnc"
 import { COLORS } from '../constants/theme'
 import { fetchExercisesById } from '../api/IdExerciseDB'
+import { useNavigation } from '@react-navigation/native'
 
 
 export default function Create() {
  
-    
+    const navigation = useNavigation()
       
     const auth = getAuth()
     const db = getFirestore()
@@ -35,6 +36,7 @@ export default function Create() {
         // Save workout to Firestore
         try {
           const docRef = await addDoc(collection(db, 'workouts'), formData);
+          navigation.navigate("Home")
           console.log('Workout added with ID: ', docRef.id);
         } catch (e) {
           console.error('Error adding workout: ', e);
@@ -48,6 +50,7 @@ export default function Create() {
         placeholder="Workout Title"
         value={formData.title}
         onChangeText={(text) => setFormData({ ...formData, title: text })}
+        style = {tw`border p-2 rounded-xl bg-[${COLORS.darkBrown}] text-[${COLORS.primary}] text-xl text-center`}
       />
       {formData.exercises.map((exercise, index) => (
         <Workout

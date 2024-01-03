@@ -1,8 +1,7 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native';
 import AntIcon from "react-native-vector-icons/AntDesign";
-import { ScrollView } from 'react-native-gesture-handler';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import tw from "twrnc"
 import { COLORS } from '../constants/theme';
@@ -12,8 +11,8 @@ export default function ExerciseDetails() {
     const { Exercise } = route.params;
     
   return (
-    <View className = "flex flex-1">
-      <View className = " shadow-md bg-neutral-200 rounded-b-[40px] ">
+    <View style  = {tw`flex flex-1 pb-5`} >
+      <View style  = {tw` shadow-md bg-neutral-200 rounded-b-[40px]`}>
         <Image
           source={{uri: Exercise.gifUrl}}
           contentFit='cover'
@@ -25,7 +24,7 @@ export default function ExerciseDetails() {
 
       </View>
       
-      <ScrollView className = "mx-4 space-y-2 mt-3 p-3" showsVerticalScrollIndicator = {false} contentContainerStyle = {{paddingBottom: 80}} style = {tw` bg-[${COLORS.primary}]`}>
+      <ScrollView    style={[tw`bg-[${COLORS.primary}]`, { paddingBottom: 200 }]} showsVerticalScrollIndicator={false}>
         <Text 
           style = {[{fontSize: hp(3.5)}, tw`font-semibold text-neutral-800 tracking-wider p-4 text-[${COLORS.darkBrown}]`]}
           
