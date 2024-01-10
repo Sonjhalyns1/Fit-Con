@@ -4,16 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import tw from 'twrnc';
 import { COLORS } from '../constants/theme';
 
-export default function WorkoutCard({ workout, id }) {
-  const navigation = useNavigation();
-
-  const handleCardPress = () => {
-    // Navigate to the workout detail page with the workou t ID as a parameter
-    navigation.navigate('Workout information', { workoutId: id });
-  };
-
+export default function CardForHistory({ workout, id }) {
   return (
-    <TouchableOpacity onPress={handleCardPress}>
+    <View>
       <View>
         <View style={tw`border p-2 mt-5 rounded-t-2xl bg-[${COLORS.dark}]`}>
           <View style={tw`flex-row justify-between items-center`}>
@@ -49,6 +42,6 @@ export default function WorkoutCard({ workout, id }) {
             ))}
         </View>
       </View>
-    </TouchableOpacity>
-  );
+    </View>
+  )
 }

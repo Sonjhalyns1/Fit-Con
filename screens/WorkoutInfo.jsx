@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Alert, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Alert, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Stopwatch } from 'react-native-stopwatch-timer';
@@ -92,6 +92,10 @@ export default function WorkoutInfo() {
   }
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={tw`flex flex-1 justify-center bg-[${COLORS.primary}] p-5`}
+    >
     <ScrollView contentContainerStyle={{ paddingBottom: 100 }} style={tw`flex flex-1 pt-15 px-10 bg-[${COLORS.primary}]`}>
 
       <TouchableOpacity onPress={handleStartWorkout}>
@@ -158,6 +162,7 @@ export default function WorkoutInfo() {
 
       <Button title="Send to History" onPress={handleSendToHistory} />
     </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 

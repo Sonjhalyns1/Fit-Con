@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, Image } from 'react-native'
+import { View, Text, TextInput, Button, Image, KeyboardAvoidingView, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { db } from '../data/Firebase';
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
@@ -48,7 +48,10 @@ export default function SignUp() {
         navigation.navigate("Login")
       }
   return (
-    <View style = {tw`flex flex-1 justify-center  bg-[${COLORS.primary}] p-5`}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={tw`flex flex-1 justify-center bg-[${COLORS.primary}] p-5`}
+    >
         <View >
             <Text style = {tw`text-3xl text-[${COLORS.darkBrown}] font-bold`}>
                 Let's sculpt
@@ -91,10 +94,10 @@ export default function SignUp() {
       <Button title="Create Account" onPress={onSubmit}  />
       <View>
         <Text>
-            Have an existent account <Button title="Create Account" onPress={navigateLogin}  />
+            Have an existent account <Button title="Login" onPress={navigateLogin}  />
         </Text>
       </View>
       
-    </View>
+    </KeyboardAvoidingView>
   )
 }

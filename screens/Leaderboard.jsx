@@ -8,6 +8,18 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import tw from 'twrnc';
 import { COLORS } from '../constants/theme';
 import { db } from '../data/Firebase';
+import LoadingAni from '../components/LoadingAni';
+import FriendsCard from '../components/FriendsCard';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+import { Dimensions } from "react-native"
 
 export default function Leaderboard() {
   const navigation = useNavigation();
@@ -67,9 +79,7 @@ export default function Leaderboard() {
     navigation.navigate('Add User');
   };
 
-  const routeToFriendsHistory = (FriendId) => {
-    navigation.navigate("Friends History", {FriendsId: FriendId})
-  }
+  
 
   if (loading) {
     return (
@@ -78,28 +88,62 @@ export default function Leaderboard() {
       </View>
     );
   }
+  const commitsData = [
+    { date: "2016-11-02", count: 4 },
+    { date: "2017-01-03", count: 2 },
+    { date: "2017-01-04", count: 3 },
+    { date: "2017-01-05", count: 4 },
+    { date: "2017-01-06", count: 5 },
+    { date: "2017-01-30", count: 2 },
+    { date: "2017-01-31", count: 3 },
+    { date: "2017-03-01", count: 2 },
+    { date: "2017-04-02", count: 4 },
+    { date: "2017-03-05", count: 2 },
+    { date: "2017-02-30", count: 4 }
+  ];
 
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 100 }} style={tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`}>
+      
+      <Text style={tw` text-2xl font-bold text-[${COLORS.dark}]`}>Friends</Text>
+      <ScrollView horizontal={true} style={tw`flex-row`}>
       <TouchableOpacity
-        style={tw`border p-2 rounded-2xl m-2 bg-[${COLORS.dark}]`}
+        style={tw``}
         onPress={routeToAddUser}>
-        <View style={tw`flex flex-row items-center justify-end `}>
-          <View style={tw`border p-2 rounded-full bg-[${COLORS.brown}]`}>
-            <AntDesign name="adduser" size={20} style={tw`text-[${COLORS.dark}]`} />
-          </View>
-          <Text style={tw` text-[${COLORS.primary}] text-xl`}>Add Friend</Text>
+          <View style = {tw`flex items-center`}>
+            <View style={[{width: wp(14)},tw`border p-3 rounded-full bg-[${COLORS.dark}] m-2`]}>
+            <AntDesign name="adduser"  style={tw`text-[${COLORS.primary}] text-xl font-bold text-center`} />
+            
         </View>
+        <Text style = {tw`font-semibold text-[${COLORS.green}]`}>Add User</Text>
+        </View>
+        
+        
+        
       </TouchableOpacity>
-      <Text style={tw`text-center text-xl font-bold text-[${COLORS.darkBrown}]`}>Leaderboard</Text>
-      {friends.map((friend) => (
-        <TouchableOpacity onPress={() => routeToFriendsHistory(friend.uuid)}>
-
-          <View key={friend.uuid} style={tw`border p-2 rounded-xl bg-[${COLORS.dark}] m-2`}>
-            <Text style={tw`text-[${COLORS.primary}] text-lg font-semibold`}>{friend.name}</Text>
-          </View>
-        </TouchableOpacity>
-      ))}
+        {friends.map((friend) => (
+          <FriendsCard key={friend.id} friendName={friend.name} friendID={friend.uuid} />
+        ))}
+      </ScrollView>
+      <Text style={tw` mt-4 text-2xl font-bold text-[${COLORS.dark}]`}>Friend's History</Text>
+      <ContributionGraph
+  values={commitsData}
+  endDate={new Date("2017-04-01")}
+  numDays={105}
+  width={Dimensions.get("window").width}
+  height={200}
+  chartConfig={chartConfig}
+/>
     </ScrollView>
   );
 }
+const chartConfig = {
+  backgroundGradientFrom: "#1E2923",
+  backgroundGradientFromOpacity: 0,
+  backgroundGradientTo: "#08130D",
+  backgroundGradientToOpacity: 0.5,
+  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  strokeWidth: 2, // optional, default 3
+  barPercentage: 0.5,
+  useShadowColorFromDataset: false // optional
+};

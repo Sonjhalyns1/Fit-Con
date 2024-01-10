@@ -8,6 +8,8 @@ import { db } from '../data/Firebase';
 import tw from 'twrnc';
 import { COLORS } from '../constants/theme';
 
+import CardForHistory from '../components/CardForHistory';
+
 export default function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,6 +27,7 @@ export default function History() {
       let markedDatesData = {};
       let agendaItemsData = {};
 
+      
       for (const doc of querySnap.docs) {
         const note = doc.data().notes;
         const workoutIdentifier = doc.data().workoutId;
@@ -33,8 +36,9 @@ export default function History() {
         selectedTextColor: 'yellow',
         dotColor: 'white'};
         const workoutDetails = await getWorkoutDetails(workoutIdentifier);
+        
         const workoutName = workoutDetails ? workoutDetails.title : 'Unknown Workout';
-        const agendaItem = { note, workoutName };
+        const agendaItem = { note, workoutName, workoutDetails, workoutIdentifier };
         if (agendaItemsData[date]) {
           agendaItemsData[date].push(agendaItem);
         } else {
@@ -69,19 +73,31 @@ export default function History() {
     return (
       <TouchableOpacity>
         <Card>
-          <Card.Content>
-            <View style={tw` p-2 rounded-t-2xl bg-[${COLORS.darkBrown}]`}>
-                <Text style = {tw`text-center text-[${COLORS.primary}] text-lg font-semibold`}>{item.workoutName}</Text>
-            </View>
-            <View style = {tw` p-2 rounded-b-2xl bg-[${COLORS.brown}]`}>
-                <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
-            </View>
+          <Card.Content >
+
+            
+            
+                <Text style = {tw`text-[${COLORS.dark}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
+            
+            <CardForHistory key={item.workoutIdentifier} workout = {item.workoutDetails} />
               
               
            
           </Card.Content>
         </Card>
       </TouchableOpacity>
+    );
+  };
+  const renderEmptyData = () => {
+    return (
+      <Card>
+        <Card.Content>
+          <View style={tw``}>
+            <Text style={tw`text-[${COLORS.dark}] font-semibold text-lg text-center`}>No workout recoded!</Text>
+          </View>
+        </Card.Content>
+      </Card>
+      
     );
   };
   const theme = {
@@ -102,6 +118,7 @@ export default function History() {
         onDayPress={(day) => {}}
 
         renderItem={renderItem}
+        renderEmptyData={renderEmptyData} 
         theme={theme}
         
       />

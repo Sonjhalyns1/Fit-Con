@@ -15,12 +15,14 @@ export default function Create() {
       
     const auth = getAuth()
     const db = getFirestore()
-    const [formData, setFormData] = useState({
+    const initialFormat = 
+      {
         title: '', 
         exercises: [],
         numberOfSets: 0, 
         uuid: auth.currentUser.uid
-    });
+    }
+    const [formData, setFormData] = useState(initialFormat);
     const handleAddExercise = () => {
         const updatedExercises = [...formData.exercises, { name: '', sets: []}];
         setFormData({ ...formData, exercises: updatedExercises, numberOfSets: formData.numberOfSets + 1, });
@@ -36,6 +38,7 @@ export default function Create() {
         // Save workout to Firestore
         try {
           const docRef = await addDoc(collection(db, 'workouts'), formData);
+          setFormData(initialFormat)
           navigation.navigate("Home")
           console.log('Workout added with ID: ', docRef.id);
         } catch (e) {
@@ -44,25 +47,30 @@ export default function Create() {
       };
 
   return (
-    
-    <ScrollView contentContainerStyle={{ paddingBottom: 100 }}  style = {tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`} >
-      <TextInput
-        placeholder="Workout Title"
-        value={formData.title}
-        onChangeText={(text) => setFormData({ ...formData, title: text })}
-        style = {tw`border p-2 rounded-xl bg-[${COLORS.darkBrown}] text-[${COLORS.primary}] text-xl text-center`}
-      />
-      {formData.exercises.map((exercise, index) => (
-        <Workout
-          key={index}
-          index={index}
-          exercise={exercise}
-          onChange={handleExerciseChange}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={tw`flex flex-1 justify-center bg-[${COLORS.primary}] p-5`}
+    >
+      
+      <ScrollView contentContainerStyle={{ paddingBottom: 120 }}  style = {tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`} >
+        <TextInput
+          placeholder="Workout Title"
+          value={formData.title}
+          onChangeText={(text) => setFormData({ ...formData, title: text })}
+          style = {tw`border p-2 rounded-xl bg-[${COLORS.darkBrown}] text-[${COLORS.primary}] text-xl text-center`}
         />
-      ))}
-      <Button title="Add Exercise" onPress={handleAddExercise} />
-      <Button title="Submit Workout" onPress={handleWorkoutSubmit} />
-    </ScrollView>
+        {formData.exercises.map((exercise, index) => (
+          <Workout
+            key={index}
+            index={index}
+            exercise={exercise}
+            onChange={handleExerciseChange}
+          />
+        ))}
+        <Button title="Add Exercise" onPress={handleAddExercise} />
+        <Button title="Submit Workout" onPress={handleWorkoutSubmit} />
+      </ScrollView>
+    </KeyboardAvoidingView>
     
   )
 }

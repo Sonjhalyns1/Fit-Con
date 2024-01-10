@@ -10,6 +10,7 @@ import tw from 'twrnc';
 import { COLORS } from '../constants/theme';
 import WorkoutCard from '../components/WorkoutCard';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import LoadingAni from '../components/LoadingAni';
 
 export default function Home() {
   const auth = getAuth();
@@ -76,7 +77,7 @@ export default function Home() {
   if (loading) {
     return (
       <View>
-        <Text>Loading...</Text>
+        <LoadingAni />
       </View>
     );
   }
@@ -107,7 +108,10 @@ export default function Home() {
       {workouts.length > 0 && (
         <View>
           {workouts.map((workout) => (
-            <WorkoutCard key={workout.id} id={workout.id} workout={workout.data} />
+            
+
+              <WorkoutCard key={workout.id} id={workout.id} workout={workout.data} />
+
           ))}
         </View>
       )}
