@@ -10,6 +10,7 @@ import { COLORS } from '../constants/theme';
 
 import CardForHistory from '../components/CardForHistory';
 
+
 export default function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,7 +60,7 @@ export default function History() {
 
     fetchWorkout();
   }, [auth.currentUser?.uid]);
-  console.log(agendaItems);
+  
 
   if (loading) {
     return (
@@ -71,23 +72,19 @@ export default function History() {
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity key={item.workoutIdentifier}>
         <Card>
-          <Card.Content >
-
-            
-            
-                <Text style = {tw`text-[${COLORS.dark}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
-            
-            <CardForHistory key={item.workoutIdentifier} workout = {item.workoutDetails} />
-              
-              
-           
+          <Card.Content>
+            <Text style={tw`text-[${COLORS.dark}] font-semibold text-lg`}>
+              Note: <Text style={tw`text-sm`}>{item.note}</Text>
+            </Text>
+            <CardForHistory workout={item.workoutDetails} />
           </Card.Content>
         </Card>
       </TouchableOpacity>
     );
   };
+  
   const renderEmptyData = () => {
     return (
       <Card>

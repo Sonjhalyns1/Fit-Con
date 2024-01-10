@@ -20,6 +20,8 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 import { Dimensions } from "react-native"
+import Heatmap from '../components/Heatmap';
+import FriendsHeatmap from '../components/FriendsHeatmap';
 
 export default function Leaderboard() {
   const navigation = useNavigation();
@@ -88,19 +90,7 @@ export default function Leaderboard() {
       </View>
     );
   }
-  const commitsData = [
-    { date: "2016-11-02", count: 4 },
-    { date: "2017-01-03", count: 2 },
-    { date: "2017-01-04", count: 3 },
-    { date: "2017-01-05", count: 4 },
-    { date: "2017-01-06", count: 5 },
-    { date: "2017-01-30", count: 2 },
-    { date: "2017-01-31", count: 3 },
-    { date: "2017-03-01", count: 2 },
-    { date: "2017-04-02", count: 4 },
-    { date: "2017-03-05", count: 2 },
-    { date: "2017-02-30", count: 4 }
-  ];
+
 
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 100 }} style={tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`}>
@@ -126,24 +116,13 @@ export default function Leaderboard() {
         ))}
       </ScrollView>
       <Text style={tw` mt-4 text-2xl font-bold text-[${COLORS.dark}]`}>Friend's History</Text>
-      <ContributionGraph
-  values={commitsData}
-  endDate={new Date("2017-04-01")}
-  numDays={105}
-  width={Dimensions.get("window").width}
-  height={200}
-  chartConfig={chartConfig}
-/>
+      {friends.map((friend) => (
+          <FriendsHeatmap key={friend.id} FriendUID = {friend.uuid} FriendName = {friend.name} />
+        ))}
+      
+
+
     </ScrollView>
   );
 }
-const chartConfig = {
-  backgroundGradientFrom: "#1E2923",
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "#08130D",
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false // optional
-};
+

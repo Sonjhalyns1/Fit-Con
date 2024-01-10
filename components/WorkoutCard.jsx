@@ -17,7 +17,7 @@ export default function WorkoutCard({ workout, id }) {
       <View>
         <View style={tw`border p-2 mt-5 rounded-t-2xl bg-[${COLORS.dark}]`}>
           <View style={tw`flex-row justify-between items-center`}>
-                <Text style={tw`text-[${COLORS.primary}] text-center text-md font-bold`}>
+                <Text style={tw`text-[${COLORS.primary}] text-center  font-bold`}>
                     
                     {workout.title.length > 16 ? workout.title.slice(0, 15) + '...' : workout.title}
                 </Text>

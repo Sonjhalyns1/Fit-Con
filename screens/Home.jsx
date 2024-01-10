@@ -11,6 +11,7 @@ import { COLORS } from '../constants/theme';
 import WorkoutCard from '../components/WorkoutCard';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import LoadingAni from '../components/LoadingAni';
+import Heatmap from '../components/Heatmap';
 
 export default function Home() {
   const auth = getAuth();
@@ -93,13 +94,14 @@ export default function Home() {
         </View>
       )}
       <View>
+        <Heatmap />
         <TouchableOpacity style = {tw`border p-2 rounded-2xl m-2 bg-[${COLORS.dark}]`} onPress={routeToHistory}>
             <View style = {tw`flex flex-row items-center justify-center `}>
                 <View style = {tw`border p-2 rounded-full bg-[${COLORS.brown}]`}>
                     <FontAwesome name="history" size={hp(2)} style={tw`text-[${COLORS.dark}]`} />
                 </View>
                 <Text style = {tw` text-[${COLORS.primary}] text-xl`}>
-                    History
+                    View History
                 </Text>
             </View>
         </TouchableOpacity>
