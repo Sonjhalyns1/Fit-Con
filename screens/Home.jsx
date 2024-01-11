@@ -1,3 +1,5 @@
+
+
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import { db } from '../data/Firebase';
@@ -110,10 +112,7 @@ export default function Home() {
       {workouts.length > 0 && (
         <View>
           {workouts.map((workout) => (
-            
-
               <WorkoutCard key={workout.id} id={workout.id} workout={workout.data} />
-
           ))}
         </View>
       )}
