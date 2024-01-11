@@ -9,6 +9,9 @@ import { db } from '../data/Firebase';
 import { getAuth } from 'firebase/auth';
 import { COLORS } from '../constants/theme';
 import { useNavigation } from '@react-navigation/native';
+import tw from "twrnc"
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+
 
 export default function FriendsHeatmap({FriendUID, FriendName}) {
     
@@ -60,7 +63,7 @@ export default function FriendsHeatmap({FriendUID, FriendName}) {
             chartConfig={chartConfig}
             squareSize={Dimensions.get("window").width/20}
           />
-          <Text>{FriendName}</Text>
+          <Text style = {[{fontSize: wp(4.5)},tw`pb-3 text-[${COLORS.darkBrown}] font-semibold`]}>{FriendName}</Text>
         
   
         

@@ -8,7 +8,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { getAuth } from 'firebase/auth';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import tw from 'twrnc';
+import tw, { style } from 'twrnc';
 import { COLORS } from '../constants/theme';
 import WorkoutCard from '../components/WorkoutCard';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
@@ -28,7 +28,8 @@ export default function Home() {
     setLoading(true);
     const workoutRef = collection(db, 'workouts');
     const q = query(workoutRef, where('uuid', '==', user.uid));
-    const querySnap = await getDocs(q);
+    const qHidden = query(q,where("hidden", "==", true) )
+    const querySnap = await getDocs(qHidden);
     let workoutsData = [];
     querySnap.forEach((doc) => {
       workoutsData.push({
@@ -76,6 +77,9 @@ export default function Home() {
     navigation.navigate("History");
   
   }
+  const routeToArchive = () =>{
+    navigation.navigate("Archive")
+  }
 
   if (loading) {
     return (
@@ -87,6 +91,18 @@ export default function Home() {
 
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 100 }} style={tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`}>
+      <View style = {tw`items-end `}>
+        <View style = {[{width: wp(22) },tw`flex-row justify-end border p-2 rounded-xl bg-[${COLORS.dark}]`]}>
+          <MaterialCommunityIcons name="archive-eye" size={hp(2.5)} style={tw`text-[${COLORS.brown}]`} />
+            <TouchableOpacity onPress={() => {routeToArchive()}} style = {tw`flex justify-end `}> 
+              <View>
+                <Text style = {tw`text-[${COLORS.primary}]`}>Archive</Text>
+              </View>
+            </TouchableOpacity>
+
+        </View>
+
+      </View>
       {profile && (
         <View>
           <Text style={tw`text-3xl text-[${COLORS.dark}] font-bold`}>

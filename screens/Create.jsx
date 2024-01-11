@@ -18,6 +18,7 @@ export default function Create() {
     const initialFormat = 
       {
         title: '', 
+        hidden: true,
         exercises: [],
         numberOfSets: 0, 
         uuid: auth.currentUser.uid

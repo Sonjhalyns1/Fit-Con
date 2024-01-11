@@ -38,7 +38,7 @@ export default function BottomTabNavigation() {
                 tabBarIcon: ({focused}) => {
                     return <Ionicons name= {focused ? "home" : "home-outline"}
                     size={30} 
-                    color={focused ? COLORS.primary : COLORS.green} />
+                    color={focused ? COLORS.dark : COLORS.green} />
 
                 }
             }}
@@ -49,7 +49,7 @@ export default function BottomTabNavigation() {
                 tabBarIcon: ({focused}) => {
                     return <Ionicons name= {focused ? "add-circle" : "add-circle-outline"}
                     size={30} 
-                    color={focused ? COLORS.primary : COLORS.green} />
+                    color={focused ? COLORS.dark : COLORS.green} />
 
                 }
             }}
@@ -61,7 +61,7 @@ export default function BottomTabNavigation() {
                 tabBarIcon: ({focused}) => {
                     return <MaterialIcons name= {focused ? "leaderboard" : "leaderboard"}
                     size={30} 
-                    color={focused ? COLORS.primary : COLORS.green} />
+                    color={focused ? COLORS.dark : COLORS.green} />
 
                 }
             }}
@@ -72,7 +72,7 @@ export default function BottomTabNavigation() {
                 tabBarIcon: ({focused}) => {
                     return <FontAwesome name= {focused ? "dumbbell" : "dumbbell"}
                     size={30} 
-                    color={focused ? COLORS.primary : COLORS.green} />
+                    color={focused ? COLORS.dark : COLORS.green} />
 
                 }
             }}

@@ -25,12 +25,12 @@ export default function BodyPart() {
 
 
   return (
-    <ScrollView style = {tw`flex flex-1 pt-20 px-5 bg-[${COLORS.primary}]`}>
+    <View style = {tw`flex flex-1 pt-5 px-5 bg-[${COLORS.primary}]`}>
       
-      <Text style = {[{fontSize: hp(2.4)}, tw`text-center font-bold text-[${COLORS.darkBrown}]`]}>{bodyPart} Workouts</Text>
+      <Text style = {[{fontSize: hp(2.4), textTransform: "uppercase"}, tw`text-center font-bold text-[${COLORS.darkBrown}] pb-5`] }>{bodyPart} Workouts</Text>
       <View className = "mb-10">
                 <ExerciseList data = {exercises} />
             </View>
-    </ScrollView>
+    </View>
   );
 }

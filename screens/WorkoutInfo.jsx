@@ -50,6 +50,7 @@ export default function WorkoutInfo() {
       const historyRef = collection(db, 'history');
       const historyData = {
         workoutId,
+        
         duration: currentTime,
         date: new Date().toISOString(),
         uuid: auth.currentUser.uid,
