@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button, Image, KeyboardAvoidingView, Platform } from 'react-native'
+import { View, Text, TextInput, Button, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { db } from '../data/Firebase';
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
@@ -45,7 +45,20 @@ export default function SignUp() {
 
         
         } catch (error) {
-        console.log("an ERROR", error)
+          Alert.alert(
+            `${error}`,
+            'Please try again',
+            [
+              
+              {
+                text: 'Ok',
+                
+              },
+            ],
+            {
+              cancelable: false,
+            }
+          );
     }
       }
       function navigateLogin(){

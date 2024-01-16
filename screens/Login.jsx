@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 import tw from "twrnc";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -30,7 +30,20 @@ export default function Login() {
         navigation.navigate("Bottom Navigation");
       }
     } catch (error) {
-      console.log("AN ERROR", error);
+      Alert.alert(
+        `${error}`,
+        'Please try again',
+        [
+          
+          {
+            text: 'Ok',
+            
+          },
+        ],
+        {
+          cancelable: false,
+        }
+      );
     }
   }
 

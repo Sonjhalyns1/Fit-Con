@@ -29,39 +29,39 @@ export default function FriendsHistory() {
         const querySnap = await getDocs(q);
         let markedDatesData = {};
         let agendaItemsData = {};
-  
+
         for (const doc of querySnap.docs) {
-            const note = doc.data().notes;
-            const workoutIdentifier = doc.data().workoutId;
-            const date = doc.data().date.split('T')[0]; // Extract date without time
-            markedDatesData[date] = { selected: true, marked: true, selectedColor: '#222222',
-            selectedTextColor: 'yellow',
-            dotColor: 'white'};
-            const workoutDetails = await getWorkoutDetails(workoutIdentifier);
-            
-            const workoutName = workoutDetails ? workoutDetails.title : 'Unknown Workout';
-            const agendaItem = { note, workoutName, workoutDetails, workoutIdentifier };
-            if (agendaItemsData[date]) {
-              agendaItemsData[date].push(agendaItem);
-            } else {
-              agendaItemsData[date] = [agendaItem];
-            }
+          const note = doc.data().notes;
+          const workoutIdentifier = doc.data().workoutId;
+          const date = doc.data().date.split('T')[0]; // Extract date without time
+          markedDatesData[date] = { selected: true, marked: true, selectedColor: '#222222',
+          selectedTextColor: 'yellow',
+          dotColor: 'white'};
+          const workoutDetails = await getWorkoutDetails(workoutIdentifier);
+
+          const workoutName = workoutDetails ? workoutDetails.title : 'Unknown Workout';
+          const agendaItem = { note, workoutName };
+          if (agendaItemsData[date]) {
+            agendaItemsData[date].push(agendaItem);
+          } else {
+            agendaItemsData[date] = [agendaItem];
           }
-    
-          setMarkedDates(markedDatesData);
-          setAgendaItems(agendaItemsData);
-          setLoading(false);
         }
-    
-        async function getWorkoutDetails(workoutId) {
-          const workoutDoc = doc(db, 'workouts', workoutId);
-          const workoutSnap = await getDoc(workoutDoc);
-          return workoutSnap.exists() ? workoutSnap.data() : null;
-        }
-    
-        fetchWorkout();
-      }, [auth.currentUser?.uid]);
-      console.log(agendaItems);
+
+        setMarkedDates(markedDatesData);
+        setAgendaItems(agendaItemsData);
+        setLoading(false);
+      }
+
+      async function getWorkoutDetails(workoutId) {
+        const workoutDoc = doc(db, 'workouts', workoutId);
+        const workoutSnap = await getDoc(workoutDoc);
+        return workoutSnap.exists() ? workoutSnap.data() : null;
+      }
+
+      fetchWorkout();
+    }, [auth.currentUser?.uid]);
+    console.log(agendaItems);
     
       if (loading) {
         return (
@@ -75,8 +75,16 @@ export default function FriendsHistory() {
         return (
           <TouchableOpacity>
             <Card>
-              <Card.Content >
-                <CardForHistory  key={item.workoutIdentifier} workout = {item.workoutDetails} /> 
+              <Card.Content>
+                <View style={tw` p-2 rounded-t-2xl bg-[${COLORS.darkBrown}]`}>
+                    <Text style = {tw`text-center text-[${COLORS.primary}] text-lg font-semibold`}>{item.workoutName}</Text>
+                </View>
+                <View style = {tw` p-2 rounded-b-2xl bg-[${COLORS.brown}]`}>
+                    <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
+                </View>
+  
+  
+  
               </Card.Content>
             </Card>
           </TouchableOpacity>

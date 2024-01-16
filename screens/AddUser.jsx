@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { collection, doc, setDoc, getDocs, query, where, arrayUnion } from 'firebase/firestore';
 import { db } from '../data/Firebase';
 import { getAuth } from 'firebase/auth';
@@ -21,6 +21,20 @@ export default function AddUser() {
       const userQuerySnapshot = await getDocs(userQuery);
 
       if (userQuerySnapshot.empty) {
+        Alert.alert(
+          `Friend not found`,
+          'Please try again',
+          [
+            
+            {
+              text: 'Ok',
+              
+            },
+          ],
+          {
+            cancelable: false,
+          }
+        );
         console.log('Friend not found');
         // Handle the case where the friend is not found
         return;
@@ -33,6 +47,20 @@ export default function AddUser() {
       console.log('Friend added successfully');
       // You can also update your local state or perform other actions as needed
     } catch (error) {
+      Alert.alert(
+        `${error}`,
+        'Please try again',
+        [
+          
+          {
+            text: 'Ok',
+            
+          },
+        ],
+        {
+          cancelable: false,
+        }
+      );
       console.error('Error adding friend: ', error);
     }
   };

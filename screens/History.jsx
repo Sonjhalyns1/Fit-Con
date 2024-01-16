@@ -26,64 +26,68 @@ export default function History() {
       const q = query(historyRef, where('uuid', '==', user.uid));
       const querySnap = await getDocs(q);
       let markedDatesData = {};
-      let agendaItemsData = {};
+        let agendaItemsData = {};
 
-      
-      for (const doc of querySnap.docs) {
-        const note = doc.data().notes;
-        const workoutIdentifier = doc.data().workoutId;
-        const date = doc.data().date.split('T')[0]; // Extract date without time
-        markedDatesData[date] = { selected: true, marked: true, selectedColor: '#222222',
-        selectedTextColor: 'yellow',
-        dotColor: 'white'};
-        const workoutDetails = await getWorkoutDetails(workoutIdentifier);
-        
-        const workoutName = workoutDetails ? workoutDetails.title : 'Unknown Workout';
-        const agendaItem = { note, workoutName, workoutDetails, workoutIdentifier };
-        if (agendaItemsData[date]) {
-          agendaItemsData[date].push(agendaItem);
-        } else {
-          agendaItemsData[date] = [agendaItem];
+        for (const doc of querySnap.docs) {
+          const note = doc.data().notes;
+          const workoutIdentifier = doc.data().workoutId;
+          const date = doc.data().date.split('T')[0]; // Extract date without time
+          markedDatesData[date] = { selected: true, marked: true, selectedColor: '#222222',
+          selectedTextColor: 'yellow',
+          dotColor: 'white'};
+          const workoutDetails = await getWorkoutDetails(workoutIdentifier);
+
+          const workoutName = workoutDetails ? workoutDetails.title : 'Unknown Workout';
+          const agendaItem = { note, workoutName };
+          if (agendaItemsData[date]) {
+            agendaItemsData[date].push(agendaItem);
+          } else {
+            agendaItemsData[date] = [agendaItem];
+          }
         }
+
+        setMarkedDates(markedDatesData);
+        setAgendaItems(agendaItemsData);
+        setLoading(false);
       }
 
-      setMarkedDates(markedDatesData);
-      setAgendaItems(agendaItemsData);
-      setLoading(false);
+      async function getWorkoutDetails(workoutId) {
+        const workoutDoc = doc(db, 'workouts', workoutId);
+        const workoutSnap = await getDoc(workoutDoc);
+        return workoutSnap.exists() ? workoutSnap.data() : null;
+      }
+
+      fetchWorkout();
+    }, [auth.currentUser?.uid]);
+    console.log(agendaItems);
+
+    if (loading) {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
     }
 
-    async function getWorkoutDetails(workoutId) {
-      const workoutDoc = doc(db, 'workouts', workoutId);
-      const workoutSnap = await getDoc(workoutDoc);
-      return workoutSnap.exists() ? workoutSnap.data() : null;
-    }
+    const renderItem = (item) => {
+      return (
+        <TouchableOpacity>
+          <Card>
+            <Card.Content>
+              <View style={tw` p-2 rounded-t-2xl bg-[${COLORS.darkBrown}]`}>
+                  <Text style = {tw`text-center text-[${COLORS.primary}] text-lg font-semibold`}>{item.workoutName}</Text>
+              </View>
+              <View style = {tw` p-2 rounded-b-2xl bg-[${COLORS.brown}]`}>
+                  <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
+              </View>
 
-    fetchWorkout();
-  }, [auth.currentUser?.uid]);
-  
 
-  if (loading) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
 
-  const renderItem = (item) => {
-    return (
-      <TouchableOpacity key={item.workoutIdentifier}>
-        <Card>
-          <Card.Content>
-            <Text style={tw`text-[${COLORS.dark}] font-semibold text-lg`}>
-              Note: <Text style={tw`text-sm`}>{item.note}</Text>
-            </Text>
-            <CardForHistory workout={item.workoutDetails} />
-          </Card.Content>
-        </Card>
-      </TouchableOpacity>
-    );
-  };
+            </Card.Content>
+          </Card>
+        </TouchableOpacity>
+      );
+    };
   
   const renderEmptyData = () => {
     return (
