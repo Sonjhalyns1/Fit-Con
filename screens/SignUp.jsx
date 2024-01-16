@@ -12,6 +12,7 @@ export default function SignUp() {
         name: "",
         email: "",
         password: "",
+
     
       });
       const {name, email, password} = formData;
@@ -29,11 +30,14 @@ export default function SignUp() {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         updateProfile(auth.currentUser,{
             displayName: name
+            
         })
         const user = userCredential.user
         const formDataCopy = {...formData}
         delete formDataCopy.password
+        formDataCopy.uid = user.uid
         formDataCopy.timestamp = serverTimestamp();
+        
 
         await setDoc(doc(db, "users", user.uid), formDataCopy)
         console.log("success")

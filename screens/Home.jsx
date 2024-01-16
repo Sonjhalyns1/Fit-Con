@@ -1,6 +1,6 @@
 
 
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, BackHandler, Alert } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import { db } from '../data/Firebase';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
@@ -40,6 +40,8 @@ export default function Home() {
     setWorkouts(workoutsData);
     setLoading(false);
   }, [auth.currentUser?.uid]);
+
+  
 
   useEffect(() => {
     async function fetchProfile() {
@@ -89,10 +91,12 @@ export default function Home() {
     );
   }
 
+
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 100 }} style={tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`}>
-      <View style = {tw`items-end `}>
-        <View style = {[{width: wp(22) },tw`flex-row justify-end border p-2 rounded-xl bg-[${COLORS.dark}]`]}>
+      
+      <View style = {tw`items-end`}>
+        <View style = {[{width: wp(22) },tw`flex-row justify-center border p-2 rounded-xl bg-[${COLORS.dark}]`]}>
           <MaterialCommunityIcons name="archive-eye" size={hp(2.5)} style={tw`text-[${COLORS.brown}]`} />
             <TouchableOpacity onPress={() => {routeToArchive()}} style = {tw`flex justify-end `}> 
               <View>
@@ -105,7 +109,7 @@ export default function Home() {
       </View>
       {profile && (
         <View>
-          <Text style={tw`text-3xl text-[${COLORS.dark}] font-bold`}>
+          <Text style={tw`text-3xl text-[${COLORS.dark}] font-bold pt-3`}>
             HI <Text style={tw`text-2xl text-[${COLORS.dark}] text-3xl font-bold`}>{profile.name}</Text>!{' '}
             <MaterialCommunityIcons name="hand-wave" size={hp(4)} style={tw`text-[${COLORS.dark}]`} />
           </Text>

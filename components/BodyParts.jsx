@@ -46,7 +46,7 @@ const BodyPartCard = ({ item, onPress }) => {
         <LinearGradient
           colors={['transparent', 'rgba(0,0,0,0.9)']}
           style={{ width: wp(40), height: hp(15), position: 'absolute', bottom: 0, borderBottomLeftRadius: 35, borderBottomRightRadius: 35 }}
-          start={{ x: 0.5, y: 0 }}
+          start={{ x: 0.5, y: .75 }}
           end={{ x: 0.5, y: 1 }}
         />
         <Text style={{ fontSize: hp(2.0), color: COLORS.brown, fontWeight: 'bold', textAlign: 'center', marginTop: 8 }}>

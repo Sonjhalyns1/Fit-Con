@@ -17,7 +17,7 @@ export default function AddUser() {
 
       // Check if the friendUUID exists in the users collection
       const userRef = collection(db, 'users');
-      const userQuery = query(userRef, where('uuid', '==', friendUUID));
+      const userQuery = query(userRef, where('uid', '==', friendUUID));
       const userQuerySnapshot = await getDocs(userQuery);
 
       if (userQuerySnapshot.empty) {

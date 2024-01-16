@@ -8,6 +8,7 @@ import { COLORS } from '../constants/theme';
 export default function ExerciseDetails() {
   const route = useRoute();
   const { Exercise } = route.params;
+  
 
   return (
     <View style={tw`flex flex-1 pb-5`}>
@@ -15,7 +16,7 @@ export default function ExerciseDetails() {
         <Image
           source={{ uri: Exercise.gifUrl }}
           contentFit='cover'
-          style={[{ width: wp(100), height: wp(100) }, tw`rounded-b-[40px]`]}
+          style={[{ width: wp(100), height: hp(40) }, tw`rounded-b-[40px]`]}
         />
       </View>
 
@@ -35,9 +36,14 @@ export default function ExerciseDetails() {
         <Text style={[{ fontSize: hp(3) }, tw`font-semibold text-neutral-700 px-4 pb-2 text-[${COLORS.dark}]`]}>
           Instructions
         </Text>
-        <Text style={tw`px-4 pb-2 text-[${COLORS.dark}]`}>
-          {Exercise.instructions}
+        <Text style={[{fontSize: hp(2)},tw`px-4 pb-2 text-[${COLORS.dark}]`]}>
+          { String(Exercise.instructions).split(',').map((instructions, index) => (
+            <Text key={index} >
+              {`\n${index+1}) ${instructions}\n`}
+            </Text>
+          ))}
         </Text>
+        
       </ScrollView>
     </View>
   );

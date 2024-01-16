@@ -54,11 +54,11 @@ export default function Heatmap() {
         <ContributionGraph
           values={commitsData}
           endDate={oneMonthAheadDate}
-          numDays={Dimensions.get("window").width/5}
-          width={Dimensions.get("window").width/1.25}
-          height={210}
+          numDays={95}
+          width={Dimensions.get("window").width/1.20}
+          height={Dimensions.get("window").height/4}
           chartConfig={chartConfig}
-          squareSize={Dimensions.get("window").width/20}
+          squareSize={Dimensions.get("window").width/22}
         />
       
 
