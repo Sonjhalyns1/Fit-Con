@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Alert, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, Button, Alert, TextInput, ScrollView, TouchableOpacity, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Stopwatch } from 'react-native-stopwatch-timer';
@@ -8,6 +8,7 @@ import { db } from '../data/Firebase';
 import { getAuth } from 'firebase/auth';
 import tw from "twrnc"
 import { COLORS } from '../constants/theme';
+import LoadingAni from '../components/LoadingAni';
 
 export default function WorkoutInfo() {
   const auth = getAuth();
@@ -86,9 +87,9 @@ export default function WorkoutInfo() {
 
   if (loading) {
     return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
+      <SafeAreaView style= {tw`flex-1 `}>
+        <LoadingAni />
+      </SafeAreaView>
     );
   }
 

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-native-paper';
 import { CalendarList, Agenda } from 'react-native-calendars';
@@ -9,6 +9,7 @@ import tw from 'twrnc';
 import { COLORS } from '../constants/theme';
 
 import CardForHistory from '../components/CardForHistory';
+import LoadingAni from '../components/LoadingAni';
 
 
 export default function History() {
@@ -63,9 +64,9 @@ export default function History() {
 
     if (loading) {
       return (
-        <View>
-          <Text>Loading...</Text>
-        </View>
+        <SafeAreaView style= {tw`flex-1 `}>
+        <LoadingAni />
+      </SafeAreaView>
       );
     }
 

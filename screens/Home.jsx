@@ -1,6 +1,6 @@
 
 
-import { View, Text, ScrollView, TouchableOpacity, BackHandler, Alert } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, BackHandler, Alert, ActivityIndicator, SafeAreaView } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import { db } from '../data/Firebase';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
@@ -85,9 +85,9 @@ export default function Home() {
 
   if (loading) {
     return (
-      <View>
+      <SafeAreaView style= {tw`flex-1 `}>
         <LoadingAni />
-      </View>
+      </SafeAreaView>
     );
   }
 

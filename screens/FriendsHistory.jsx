@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView, SafeAreaViewBase } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-native-paper';
 import { CalendarList, Agenda } from 'react-native-calendars';
@@ -10,6 +10,7 @@ import { COLORS } from '../constants/theme';
 import { useRoute } from '@react-navigation/native';
 import WorkoutCard from '../components/WorkoutCard';
 import CardForHistory from '../components/CardForHistory';
+import LoadingAni from '../components/LoadingAni';
 
 export default function FriendsHistory() {
     const route = useRoute()
@@ -65,9 +66,9 @@ export default function FriendsHistory() {
     
       if (loading) {
         return (
-          <View>
-            <Text>Loading...</Text>
-          </View>
+          <SafeAreaViewBase style= {tw`flex-1 `}>
+        <LoadingAni />
+      </SafeAreaViewBase>
         );
       }
     

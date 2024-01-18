@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, SafeAreaView, SafeAreaViewBase } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { query, doc, getDoc, collection } from 'firebase/firestore';
@@ -85,9 +85,9 @@ export default function Leaderboard() {
 
   if (loading) {
     return (
-      <View>
-        <Text>LOADING...</Text>
-      </View>
+      <SafeAreaView style= {tw`flex-1 `}>
+        <LoadingAni />
+      </SafeAreaView>
     );
   }
 

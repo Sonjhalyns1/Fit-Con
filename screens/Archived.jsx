@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, SafeAreaView } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { db } from '../data/Firebase'
 import { collection, getDocs, query, where } from 'firebase/firestore'
@@ -7,6 +7,7 @@ import { useIsFocused } from '@react-navigation/native'
 import WorkoutCard from '../components/WorkoutCard'
 import { COLORS } from '../constants/theme'
 import tw from "twrnc"
+import LoadingAni from '../components/LoadingAni'
 
 
 export default function Archived() {
@@ -40,9 +41,9 @@ export default function Archived() {
     
     if (loading) {
         return(
-            <View>
-                <Text>Loading...</Text>
-            </View>
+          <SafeAreaView style= {tw`flex-1 `}>
+          <LoadingAni />
+        </SafeAreaView>
         )
     }
     
