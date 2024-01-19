@@ -8,7 +8,7 @@ export default function LoadingAni() {
   return (
     <View style={[StyleSheet.absoluteFillObject, styles.container]}>
       <Image
-        source={require('../assets/LoadingD.gif')} // Replace with the correct Lottie animation file
+        source={require('../assets/LoadingC.gif')} // Replace with the correct Lottie animation file
       />
       
     </View>

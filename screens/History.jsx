@@ -60,7 +60,7 @@ export default function History() {
 
       fetchWorkout();
     }, [auth.currentUser?.uid]);
-    console.log(agendaItems);
+    // console.log(agendaItems);
 
     if (loading) {
       return (

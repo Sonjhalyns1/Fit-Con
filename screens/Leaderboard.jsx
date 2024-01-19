@@ -111,14 +111,14 @@ export default function Leaderboard() {
         
         
       </TouchableOpacity>
-        {friends.map((friend, id) => (
+        {/* {friends.map((friend, id) => (
           <FriendsCard key={id} friendName={friend.name} friendID={friend.uuid} />
-        ))}
+        ))} */}
       </ScrollView>
       <Text style={tw` mt-4 text-2xl font-bold text-[${COLORS.dark}]`}>Friend's History</Text>
-      {/* {friends.map((friend, id) => (
+      {friends.map((friend, id) => (
           <FriendsHeatmap key={id} FriendUID = {friend.uuid} FriendName = {friend.name} />
-        ))} */}
+        ))}
       
 
 

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, SafeAreaView, SafeAreaViewBase } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Card } from 'react-native-paper';
 import { CalendarList, Agenda } from 'react-native-calendars';
@@ -62,35 +62,35 @@ export default function FriendsHistory() {
 
       fetchWorkout();
     }, [auth.currentUser?.uid]);
-    console.log(agendaItems);
-    
-      if (loading) {
-        return (
-          <SafeAreaViewBase style= {tw`flex-1 `}>
+    // console.log(agendaItems);
+
+    if (loading) {
+      return (
+        <SafeAreaView style= {tw`flex-1 `}>
         <LoadingAni />
-      </SafeAreaViewBase>
-        );
-      }
-    
-      const renderItem = (item) => {
-        return (
-          <TouchableOpacity>
-            <Card>
-              <Card.Content>
-                <View style={tw` p-2 rounded-t-2xl bg-[${COLORS.darkBrown}]`}>
-                    <Text style = {tw`text-center text-[${COLORS.primary}] text-lg font-semibold`}>{item.workoutName}</Text>
-                </View>
-                <View style = {tw` p-2 rounded-b-2xl bg-[${COLORS.brown}]`}>
-                    <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
-                </View>
-  
-  
-  
-              </Card.Content>
-            </Card>
-          </TouchableOpacity>
-        );
-      };
+      </SafeAreaView>
+      );
+    }
+
+    const renderItem = (item) => {
+      return (
+        <TouchableOpacity>
+          <Card>
+            <Card.Content>
+              <View style={tw` p-2 rounded-t-2xl bg-[${COLORS.darkBrown}]`}>
+                  <Text style = {tw`text-center text-[${COLORS.primary}] text-lg font-semibold`}>{item.workoutName}</Text>
+              </View>
+              <View style = {tw` p-2 rounded-b-2xl bg-[${COLORS.brown}]`}>
+                  <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
+              </View>
+
+
+
+            </Card.Content>
+          </Card>
+        </TouchableOpacity>
+      );
+    };
       const renderEmptyData = () => {
         return (
           <Card>
