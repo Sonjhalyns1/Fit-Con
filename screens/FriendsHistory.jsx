@@ -39,58 +39,49 @@ export default function FriendsHistory() {
           selectedTextColor: 'yellow',
           dotColor: 'white'};
           const workoutDetails = await getWorkoutDetails(workoutIdentifier);
-
+          
           const workoutName = workoutDetails ? workoutDetails.title : 'Unknown Workout';
-          const agendaItem = { note, workoutName };
+          const agendaItem = { note, workoutName, workoutDetails, workoutIdentifier };
           if (agendaItemsData[date]) {
             agendaItemsData[date].push(agendaItem);
           } else {
             agendaItemsData[date] = [agendaItem];
           }
         }
-
+  
         setMarkedDates(markedDatesData);
         setAgendaItems(agendaItemsData);
         setLoading(false);
       }
-
+  
       async function getWorkoutDetails(workoutId) {
         const workoutDoc = doc(db, 'workouts', workoutId);
         const workoutSnap = await getDoc(workoutDoc);
         return workoutSnap.exists() ? workoutSnap.data() : null;
       }
-
+  
       fetchWorkout();
     }, [auth.currentUser?.uid]);
-    // console.log(agendaItems);
-
-    if (loading) {
-      return (
-        <SafeAreaView style= {tw`flex-1 `}>
-        <LoadingAni />
-      </SafeAreaView>
-      );
-    }
-
-    const renderItem = (item) => {
-      return (
-        <TouchableOpacity>
-          <Card>
-            <Card.Content>
-              <View style={tw` p-2 rounded-t-2xl bg-[${COLORS.darkBrown}]`}>
-                  <Text style = {tw`text-center text-[${COLORS.primary}] text-lg font-semibold`}>{item.workoutName}</Text>
-              </View>
-              <View style = {tw` p-2 rounded-b-2xl bg-[${COLORS.brown}]`}>
-                  <Text style = {tw`text-[${COLORS.primary}] font-semibold text-lg`}>Note: <Text style = {tw`text-sm`}>{item.note}</Text></Text>
-              </View>
-
-
-
-            </Card.Content>
-          </Card>
-        </TouchableOpacity>
-      );
-    };
+  
+      if (loading) {
+        return (
+          <SafeAreaView style= {tw`flex-1 `}>
+          <LoadingAni />
+        </SafeAreaView>
+        );
+      }
+  
+      const renderItem = (item) => {
+        return (
+          <TouchableOpacity key={item.workoutIdentifier}>
+            <Card>
+              <Card.Content>
+                <CardForHistory workout={item.workoutDetails} />
+              </Card.Content>
+            </Card>
+          </TouchableOpacity>
+        );
+      };
       const renderEmptyData = () => {
         return (
           <Card>

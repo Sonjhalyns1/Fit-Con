@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native'
 
 
 export default function Create() {
- 
+    
     const navigation = useNavigation()
       
     const auth = getAuth()
@@ -58,7 +58,7 @@ export default function Create() {
           placeholder="Workout Title"
           value={formData.title}
           onChangeText={(text) => setFormData({ ...formData, title: text })}
-          style = {tw`border p-2 rounded-xl bg-[${COLORS.darkBrown}] text-[${COLORS.primary}] text-xl text-center`}
+          style = {tw`border p-2 rounded-xl bg-[${COLORS.brown}] text-[${COLORS.primary}] text-xl text-center`}
         />
         {formData.exercises.map((exercise, index) => (
           <Workout

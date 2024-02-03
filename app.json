@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Fit-Connect",
-    "slug": "Fit-Connect",
-    "version": "1.0.0",
+    "name": "QuickStride Fitness",
+    "slug": "QuickStride",
+    "version": "1.0.6",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon1.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -15,7 +15,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sonjhalyns1.QuickStride",
+      "buildNumber": "7"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +27,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0c5402cd-33b0-4e4c-a44c-215cee51cfec"
+      }
     }
   }
 }

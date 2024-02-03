@@ -112,7 +112,7 @@ export default function WorkoutInfo() {
         workout.exercises.map((exercise, exerciseIndex) => (
           <View key={exerciseIndex}>
             <View style={tw`border p-2 mt-5 rounded-t-2xl bg-[${COLORS.dark}]`}>
-              <Text style={tw`text-[${COLORS.primary}] text-center`}>{exercise.WorkoutId}</Text>
+              <Text style={tw`text-[${COLORS.primary}] text-center`}>{exercise.WorkoutId ? exercise.WorkoutId : exercise.name}</Text>
             </View>
 
             <View style={tw`border p-2 rounded-b-2xl bg-[${COLORS.green}]`}>
@@ -145,7 +145,7 @@ export default function WorkoutInfo() {
                   </View>
                 ))}
               </View>
-              <TouchableOpacity onPress={() => handleSearch(exercise.WorkoutId.toLowerCase())}>
+              <TouchableOpacity onPress={() => handleSearch(exercise.WorkoutId ? exercise.WorkoutId.toLowerCase() : (exercise.name ? exercise.name.toLowerCase() : ''))}>
                 <View style={tw`bg-[${COLORS.primary}] p-3 rounded-3xl`}>
                   <Text style={tw`text-[${COLORS.dark}] text-center`}>View Workout Example</Text>
                 </View>

@@ -1,16 +1,16 @@
-import { View, Text } from 'react-native'
+
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { COLORS } from '../constants/theme';
 import Home from '../screens/Home';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 import Create from '../screens/Create';
 import Leaderboard from '../screens/Leaderboard';
 import Exercise from '../screens/Exercise';
 import Ionicons from "react-native-vector-icons/Ionicons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import FontAwesome from "react-native-vector-icons/MaterialCommunityIcons"
-import tw from "twrnc"
+
 
 export default function BottomTabNavigation() {
     const Tab = createBottomTabNavigator();
@@ -33,6 +33,8 @@ export default function BottomTabNavigation() {
     }
   return (
     <Tab.Navigator screenOptions={screenOptions}>
+
+
         <Tab.Screen name = "Home" component={Home} 
             options={{
                 tabBarIcon: ({focused}) => {
@@ -44,17 +46,19 @@ export default function BottomTabNavigation() {
             }}
         
         />
-        <Tab.Screen name = "Create" component={Create} 
-            options={{
-                tabBarIcon: ({focused}) => {
-                    return <Ionicons name= {focused ? "add-circle" : "add-circle-outline"}
-                    size={30} 
-                    color={focused ? COLORS.dark : COLORS.green} />
 
-                }
-            }}
+        <Tab.Screen name = "Create" component={Create} 
+                    options={{
+                        tabBarIcon: ({focused}) => {
+                            return <Ionicons name= {focused ? "add-circle" : "add-circle-outline"}
+                            size={30} 
+                            color={focused ? COLORS.dark : COLORS.green} />
+
+                        }
+                    }}
+                
+                />
         
-        />
         
         <Tab.Screen name = "Leaderboard" component={Leaderboard} 
             options={{

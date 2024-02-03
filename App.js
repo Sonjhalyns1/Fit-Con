@@ -18,6 +18,7 @@ import History from './screens/History';
 import AddUser from './screens/AddUser';
 import FriendsHistory from './screens/FriendsHistory';
 import Archived from './screens/Archived';
+import Profile from './screens/Profile';
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Stack.Screen name="Exercise Details" component={ExerciseDetails} options={{presentation: "modal"}}/>
         <Stack.Screen name="Add User" component={AddUser} options={{presentation: "modal"}}/>
         <Stack.Screen name="Archive" component={Archived} options={{presentation: "card"}}/>
+        <Stack.Screen name="Profile" component={Profile} options={{presentation: "card"}}/>
         <Stack.Screen name="BodyPart" component={BodyPart} />
         <Stack.Screen name="Search Exercise" component={SeachedExercise} />
         <Stack.Screen name="History" component={History} />

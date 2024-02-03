@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { rapidApiKey } from '../constants'
+import { rapidApiKey } from "../data/apiKey"
 
 const baseUrl = "https://exercisedb.p.rapidapi.com"
 
@@ -11,7 +11,7 @@ const apiCall = async(url , params) => {
             url,
             params: {limit: '20'},
             headers: {
-              'X-RapidAPI-Key': "8fe49a3681msh6b435a252da7f17p12fe8bjsn1271687db2bb",
+              'X-RapidAPI-Key': rapidApiKey,
               'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
             }
           };

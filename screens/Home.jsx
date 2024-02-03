@@ -1,6 +1,6 @@
 
 
-import { View, Text, ScrollView, TouchableOpacity, BackHandler, Alert, ActivityIndicator, SafeAreaView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import { db } from '../data/Firebase';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
@@ -13,7 +13,7 @@ import { COLORS } from '../constants/theme';
 import WorkoutCard from '../components/WorkoutCard';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import LoadingAni from '../components/LoadingAni';
-import Heatmap from '../components/Heatmap';
+
 
 export default function Home() {
   const auth = getAuth();
@@ -79,8 +79,8 @@ export default function Home() {
     navigation.navigate("History");
   
   }
-  const routeToArchive = () =>{
-    navigation.navigate("Archive")
+  const routeToProfile = () =>{
+    navigation.navigate("Profile")
   }
 
   if (loading) {
@@ -96,6 +96,17 @@ export default function Home() {
     <ScrollView contentContainerStyle={{ paddingBottom: 100 }} style={tw`flex flex-1 pt-20 px-10 bg-[${COLORS.primary}]`}>
       
       <View style = {tw`items-end`}>
+      <View style = {tw`flex-row`}>
+        <View style = {[{width: wp(22) },tw`flex-row justify-center border p-2 rounded-xl bg-[${COLORS.dark}] mr-2`]}>
+          <MaterialCommunityIcons name="archive-eye" size={hp(2.5)} style={tw`text-[${COLORS.brown}]`} />
+            <TouchableOpacity onPress={() => {routeToProfile()}} style = {tw`flex justify-end `}> 
+              <View>
+                <Text style = {tw`text-[${COLORS.primary}]`}>Profile</Text>
+              </View>
+            </TouchableOpacity>
+
+        </View>
+
         <View style = {[{width: wp(22) },tw`flex-row justify-center border p-2 rounded-xl bg-[${COLORS.dark}]`]}>
           <MaterialCommunityIcons name="archive-eye" size={hp(2.5)} style={tw`text-[${COLORS.brown}]`} />
             <TouchableOpacity onPress={() => {routeToArchive()}} style = {tw`flex justify-end `}> 
@@ -104,6 +115,8 @@ export default function Home() {
               </View>
             </TouchableOpacity>
 
+        </View>
+        
         </View>
 
       </View>
@@ -116,7 +129,7 @@ export default function Home() {
         </View>
       )}
       <View>
-        <Heatmap />
+        {/* <Heatmap /> */}
         <TouchableOpacity style = {tw`border p-2 rounded-2xl m-2 bg-[${COLORS.dark}]`} onPress={routeToHistory}>
             <View style = {tw`flex flex-row items-center justify-center `}>
                 <View style = {tw`border p-2 rounded-full bg-[${COLORS.brown}]`}>

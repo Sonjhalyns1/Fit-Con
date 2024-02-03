@@ -1,1 +1,1 @@
-export const rapidApiKey = "b7803a6276mshe589fac8576fc43p18fdbdjsn553835400336"
+export const rapidApiKey = "f93ce844cdmshf56f87d4b8981efp1b7ccbjsnfbc3d51b7f36"

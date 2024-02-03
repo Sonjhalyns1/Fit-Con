@@ -57,12 +57,17 @@ export default function WorkoutCard({ workout, id }) {
             workout.exercises.map((exercise, id) => (
               <View key={id}>
                 <View style={tw`flex flex-row justify-between`}>
-                  <Text style={tw`m-2 text-[${COLORS.primary}]`}>
-                    {exercise.WorkoutId.length > 35 ? exercise.WorkoutId.slice(0, 30) + '...' : exercise.WorkoutId}
-                  </Text>
+                <Text style={tw`m-2 text-[${COLORS.primary}]`}>
+                  {exercise.WorkoutId ? 
+                      (exercise.WorkoutId.length > 35 ? exercise.WorkoutId.slice(0, 30) + '...' : exercise.WorkoutId) 
+                      : 
+                      exercise.name
+                    }
+
+                </Text>
                   {/* Change '1' to the number of sets in the workout */}
                   <Text style={tw`m-2 text-[${COLORS.primary}] font-bold`}>
-                    X {exercise.sets.length > 0 ? exercise.sets[exercise.sets.length - 1].setNumber : 0}
+                    X {Array.isArray(exercise.sets) && exercise.sets.length > 0 ? exercise.sets[exercise.sets.length - 1].setNumber : 0}
                   </Text>
                 </View>
               </View>

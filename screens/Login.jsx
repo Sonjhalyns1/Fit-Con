@@ -82,6 +82,7 @@ export default function Login() {
           secureTextEntry
           value={password}
           onChangeText={(text) => onChange('password', text)}
+          autoComplete='email'
           style={tw`border p-3 pr-20 rounded-3xl border-[${COLORS.darkBrown}] bg-[${COLORS.brown}] text-[${COLORS.primary}] mb-5`}
         />
         <TouchableOpacity title="Submit" onPress={onSubmit} style={tw` bg-[${COLORS.green}] m-4 p-3 px-5 rounded-3xl`} >

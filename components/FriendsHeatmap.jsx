@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Dimensions, TouchableOpacity} from 'react-native';
-import { ContributionGraph } from 'react-native-chart-kit';
+import { View, Text, Dimensions, TouchableOpacity, StyleSheet} from 'react-native';
+// import { ContributionGraph } from 'react-native-chart-kit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../data/Firebase';
 import { getAuth } from 'firebase/auth';
@@ -71,11 +71,11 @@ const FriendsHeatmap = ({ FriendUID, FriendName }) => {
   }
 
   return (
-    <View style = {tw` mb-3 rounded-xl `}>
+    <View style = { tw` mb-3 rounded-xl`}>
       <TouchableOpacity onPress={() => routeToFriendsHistory(FriendUID)}>
 
       
-      <View style = {tw``}>
+      <View>
             <View style = {tw`flex-row items-center`}>
 
               
@@ -89,15 +89,15 @@ const FriendsHeatmap = ({ FriendUID, FriendName }) => {
               </View>
         </View>
       
-      <ContributionGraph
+      {/* <ContributionGraph
         values={commitsData}
         endDate={oneMonthAheadDate}
         numDays={Dimensions.get('window').width / 5}
-        width={Dimensions.get('window').width / 1.25}
-        height={210}
+        width={Dimensions.get('window').width / 1.20}
+        height={Dimensions.get("window").height/4}
         chartConfig={chartConfig}
-        squareSize={Dimensions.get('window').width / 20}
-      />
+        squareSize={Dimensions.get('window').width / 22}
+      /> */}
       
       {/* <Text style={[{ fontSize: wp(4.5) }, tw`pb-3 text-[${COLORS.darkBrown}] font-semibold`]}>
         {FriendName}
@@ -107,6 +107,7 @@ const FriendsHeatmap = ({ FriendUID, FriendName }) => {
     </View>
   );
 };
+
 
 export default FriendsHeatmap;
 
